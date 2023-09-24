@@ -60,26 +60,28 @@
     const checkTextContain=(text,searchText)=>{
 
         //kyunki  price  no  hai toh pusko pehle  to string me convert  karenge
-       return  text.toString().toLowerCase().includes(searchText)
+       return  text.toString().toLowerCase().includes(searchText);
     }
 
 
     const filterHandler=(event)=>{
         const  searchText=event.target.value.toLowerCase();
-        const filterProducts=products.filter((product)=>{
+        const filteredProducts=products.filter((product)=>{
            
             // return ( //leking is tarike se code bhara bhara lag raha toh dedicated cuntion bana  lenge
             // product.title.toLowerCase().includes(searchText),//it  filter based n title
             // product.description.toLowerCase().includes(searchText)//it  filter based n title
             // )
 
-            return (checkTextContain(product.description,searchText),
-                    checkTextContain(product.title,searchText),
-                    checkTextContain(product.price,searchText));
+            return (
+                    checkTextContain(product.description,searchText)||
+                    checkTextContain(product.title,searchText)||
+                    checkTextContain(product.price,searchText)
+                );
 
 
         });
-        renderProducts(filterProducts)
+        renderProducts(filteredProducts);
     }
 
     searchInput.addEventListener("keyup",filterHandler)
